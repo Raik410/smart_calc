@@ -134,13 +134,9 @@ void parse_trigonometry(Node **head, Node **tail, char *expression_str, int *i) 
 
 void append_number(char *expression_str, int *i, double *value, int *token) {
     setlocale(LC_NUMERIC, "C");
-    char c = 'z';
-    int scanf = 0;
-    scanf = sscanf(expression_str + *i, "%lf%c", value, &c);
-    *token = (strchr("+-^*%/() ", c) || scanf == 1) ? 1 : 0;
-    if (!(*token)) return;
-    *i += length_of_double(*value);
-    *token = 0;
+    char *next_char;
+    *value = strtod(expression_str + *i, &next_char);  // strtod возвращает указатель на следующий символ после числа
+    *i += next_char - (expression_str + *i) - 1;
 }
 
 int length_of_double(double number) {
