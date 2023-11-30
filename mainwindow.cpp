@@ -8,16 +8,19 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->label->setAlignment(Qt::AlignCenter);
-    ui->label_2->setAlignment(Qt::AlignCenter);
-    ui->label_3->setAlignment(Qt::AlignCenter);
-    ui->label_4->setAlignment(Qt::AlignCenter);
+    ui->label_xMin->setAlignment(Qt::AlignCenter);
+    ui->label_xMax->setAlignment(Qt::AlignCenter);
+    ui->label_yMin->setAlignment(Qt::AlignCenter);
+    ui->label_yMax->setAlignment(Qt::AlignCenter);
 
     QColor back_color("#1A1F33");
     QColor label_color("white");
     ui->widget_2->setBackground(QBrush(back_color));
     ui->widget_2->xAxis->setTickLabelColor(label_color);
     ui->widget_2->yAxis->setTickLabelColor(label_color);
+
+    ui->widget_2->xAxis->setBasePen(QPen(QColor(255, 255, 255)));
+    ui->widget_2->yAxis->setBasePen(QPen(QColor(255, 255, 255)));
 
     QList<QPushButton*> buttons = this->findChildren<QPushButton*>();
     foreach(QPushButton* button, buttons) {
@@ -96,10 +99,8 @@ void MainWindow::on_pushButton_graf_clicked() {
         y.push_back(parser(str, Y*X));
     }
 
-    QColor graf_color("#F6872E");
     ui->widget_2->addGraph();
     ui->widget_2->graph(0)->addData(x, y);
-    ui->widget_2->graph(0)->setPen(QPen(graf_color));
     ui->widget_2->replot();
 }
 
@@ -108,26 +109,17 @@ void MainWindow::clearButton_clicked() {
 }
 
 void MainWindow::calculateButton_clicked() {
-    // Получаем введенную строку из QLineEdit
     QString input = ui->lineEdit->text();
     QByteArray byteArray = input.toLocal8Bit();
     char* cInput = byteArray.data();
 
     bool ok;
-    double x_value = ui->lineEdit_2->text().toDouble(&ok);
-    if (!ok || !x_value) {
-        // Обработка ошибки, если строка не может быть преобразована в число
-        qDebug() << "Invalid x value";
-        x_value = 0;
-    }
+    double x_value = ui->lineEdit_2->text().toDouble();
 
-    // Вызываем функцию parser с введенным пользователем выражением
     QString result_to_str = QString::number(parser(cInput, x_value), 'g', 15);
 
-    // Отображаем результат расчета на основе ввода пользователя в QLineEdit
     ui->lineEdit->setText(result_to_str);
     expressionComplete = true;
-    on_pushButton_graf_clicked();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {

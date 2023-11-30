@@ -17,7 +17,6 @@ double parser(char *expression_str, double x_value) {
         parse_trigonometry(&head, &tail, expression_str, &i);
     }
 
-    printStack(head, tail);
     head = sharting_yard(head, tail);
     result = calc_sharting_yard(head);
 

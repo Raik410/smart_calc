@@ -44,7 +44,7 @@ Node *sharting_yard(Node *head, Node *tail) {
         push_right(&head_output, &tail_output, tail_support->data, tail_support->type, tail_support->priority);
         pop_tail(&head_support, &tail_support, &data, &type, &priority);
     }
-    // printStack(head_output, tail_output);
+
     stack_kaboom(head);
     stack_kaboom(head_support);
 

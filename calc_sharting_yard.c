@@ -31,7 +31,6 @@ double calc_sharting_yard(Node* head) {
     pop_head(&head_calculation, &tail_calculation, &result, &type, &priority);
     stack_kaboom(head);
     stack_kaboom(head_calculation);
-    // printf("a -> %lf b -> %lf result -> %lf\n", a, b, result);
 
     return result;
 }
