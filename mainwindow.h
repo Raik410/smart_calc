@@ -25,7 +25,7 @@ public:
 private:
     Ui::MainWindow *ui;
     bool expressionComplete = false;
-    double xBegin, xEnd, h, X, Y;
+    double xBegin, xEnd, h, X, yx_1, yx_2, xy_1, xy_2;
     int N;
     bool ok;
     QVector<double> x,y;

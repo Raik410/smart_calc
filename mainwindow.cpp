@@ -8,6 +8,16 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->label->setAlignment(Qt::AlignCenter);
+    ui->label_2->setAlignment(Qt::AlignCenter);
+    ui->label_3->setAlignment(Qt::AlignCenter);
+    ui->label_4->setAlignment(Qt::AlignCenter);
+
+    QColor back_color("#1A1F33");
+    QColor label_color("white");
+    ui->widget_2->setBackground(QBrush(back_color));
+    ui->widget_2->xAxis->setTickLabelColor(label_color);
+    ui->widget_2->yAxis->setTickLabelColor(label_color);
 
     QList<QPushButton*> buttons = this->findChildren<QPushButton*>();
     foreach(QPushButton* button, buttons) {
@@ -31,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->pushButton_25, &QPushButton::clicked, this, &MainWindow::clearButton_clicked);
     connect(ui->pushButton_12, &QPushButton::clicked, this, &MainWindow::calculateButton_clicked);
+    connect(ui->pushButton_31, &QPushButton::clicked, this, &MainWindow::on_pushButton_graf_clicked);
 }
 
 MainWindow::~MainWindow()
@@ -39,9 +50,11 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::digitButton_clicked() {
+    if (ui->lineEdit->text() == '0') {
+        ui->lineEdit->setText("");
+    }
     if (expressionComplete) {
-        ui->lineEdit->clear();
-        ui->lineEdit_2->clear();        // Очистка поля, если выражение было вычислено
+        ui->lineEdit->clear();       // Очистка поля, если выражение было вычислено
         expressionComplete = false;  // Сброс флага
     }
     QPushButton *button = qobject_cast<QPushButton *>(sender());
@@ -51,46 +64,47 @@ void MainWindow::digitButton_clicked() {
 }
 
 void MainWindow::on_pushButton_graf_clicked() {
-    QString input = ui->lineEdit->text();
-    QByteArray byteArray = input.toLocal8Bit();
-    char* cInput = byteArray.data();
-    double x_value = 0;
+    QString result_text = ui->lineEdit->text();
+    QByteArray array_of_bytes = result_text.toLocal8Bit();
+    char* str = array_of_bytes.data();
+    ui->widget_2->clearGraphs();
+    x.clear();
+    y.clear();
+    yx_1 = 0;
+    yx_2 = 0;
     xBegin = 0;
     xEnd = 0;
-    X = 0;
-    Y = 0;
-    x_value = ui->lineEdit_2->text().toDouble();
-    x.clear(); // Очищаем векторы перед добавлением новых данных
-    y.clear();
-    ui->widget_2->clearGraphs();
-    // if (!ok || !x_value) {
-    //     // Обработка ошибки, если строка не может быть преобразована в число
-    //     qDebug() << "Invalid x value";
-    //     x_value = 1;
-    // }
-    Y = parser(cInput, x_value);
     h = 0.1;
-    xBegin = -x_value;
-    xEnd = x_value + h;
 
-    ui->widget_2->xAxis->setRange(-4, 4);
-    ui->widget_2->yAxis->setRange(0, 9);
+    double Y = ui->lineEdit_2->text().toDouble();
+    if (Y == 0) Y = 1;
 
-    N = (xEnd - xBegin) / h + 2;
+    xy_1 = ui->xMax->text().toDouble();
+    xy_2 = ui->xMin->text().toDouble();
+    yx_1 = ui->yMax->text().toDouble();
+    yx_2 = ui->yMin->text().toDouble();
 
-    for(X = xBegin; X <= xEnd; X += h) {
+    xBegin = yx_2;
+    xEnd = yx_1 + h;
+
+    ui->widget_2->xAxis->setRange(xy_2, xy_1);
+    ui->widget_2->yAxis->setRange(yx_2, yx_1);
+    N = (xEnd - xBegin)/h + 2;
+
+    for (X = xBegin; X <= xEnd; X += h) {
         x.push_back(X);
-        y.push_back(parser(cInput, Y*X));
+        y.push_back(parser(str, Y*X));
     }
 
+    QColor graf_color("#F6872E");
     ui->widget_2->addGraph();
     ui->widget_2->graph(0)->addData(x, y);
+    ui->widget_2->graph(0)->setPen(QPen(graf_color));
     ui->widget_2->replot();
 }
 
 void MainWindow::clearButton_clicked() {
     ui->lineEdit->clear();
-    ui->lineEdit_2->clear();
 }
 
 void MainWindow::calculateButton_clicked() {
