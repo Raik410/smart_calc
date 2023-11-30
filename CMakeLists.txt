@@ -10,6 +10,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(Qt6 COMPONENTS PrintSupport REQUIRED)
+
 
 set(PROJECT_SOURCES
         main.cpp
@@ -22,6 +24,8 @@ set(PROJECT_SOURCES
         check_input_string.c
         sharting_yard.c
         stack.c
+        qcustomplot.cpp
+        qcustomplot.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -29,11 +33,14 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 qt_add_executable(calculator
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        qcustomplot.cpp qcustomplot.h
 
 )
     # target_include_directories(calculator PRIVATE .)
 target_include_directories(calculator PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(calculator PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(calculator PRIVATE Qt6::PrintSupport)
+
 # if(QT_VERSION_MAJOR EQUAL 6)
 #     qt_finalize_executable(calculator)
 # endif()

@@ -50,6 +50,44 @@ void MainWindow::digitButton_clicked() {
     }
 }
 
+void MainWindow::on_pushButton_graf_clicked() {
+    QString input = ui->lineEdit->text();
+    QByteArray byteArray = input.toLocal8Bit();
+    char* cInput = byteArray.data();
+    double x_value = 0;
+    xBegin = 0;
+    xEnd = 0;
+    X = 0;
+    Y = 0;
+    x_value = ui->lineEdit_2->text().toDouble();
+    x.clear(); // Очищаем векторы перед добавлением новых данных
+    y.clear();
+    ui->widget_2->clearGraphs();
+    // if (!ok || !x_value) {
+    //     // Обработка ошибки, если строка не может быть преобразована в число
+    //     qDebug() << "Invalid x value";
+    //     x_value = 1;
+    // }
+    Y = parser(cInput, x_value);
+    h = 0.1;
+    xBegin = -x_value;
+    xEnd = x_value + h;
+
+    ui->widget_2->xAxis->setRange(-4, 4);
+    ui->widget_2->yAxis->setRange(0, 9);
+
+    N = (xEnd - xBegin) / h + 2;
+
+    for(X = xBegin; X <= xEnd; X += h) {
+        x.push_back(X);
+        y.push_back(parser(cInput, Y*X));
+    }
+
+    ui->widget_2->addGraph();
+    ui->widget_2->graph(0)->addData(x, y);
+    ui->widget_2->replot();
+}
+
 void MainWindow::clearButton_clicked() {
     ui->lineEdit->clear();
     ui->lineEdit_2->clear();
@@ -75,6 +113,7 @@ void MainWindow::calculateButton_clicked() {
     // Отображаем результат расчета на основе ввода пользователя в QLineEdit
     ui->lineEdit->setText(result_to_str);
     expressionComplete = true;
+    on_pushButton_graf_clicked();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {

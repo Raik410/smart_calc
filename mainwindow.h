@@ -3,6 +3,7 @@
 #include "calc_functions.h"
 #include <QMainWindow>
 #include <QKeyEvent>
+#include <QVector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,11 +25,16 @@ public:
 private:
     Ui::MainWindow *ui;
     bool expressionComplete = false;
+    double xBegin, xEnd, h, X, Y;
+    int N;
+    bool ok;
+    QVector<double> x,y;
 
 private slots:
     void digitButton_clicked();
     void clearButton_clicked();
     void calculateButton_clicked();
+    void on_pushButton_graf_clicked();
 };
 
 #endif // MAINWINDOW_H
