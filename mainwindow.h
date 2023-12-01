@@ -35,6 +35,7 @@ private slots:
     void clearButton_clicked();
     void calculateButton_clicked();
     void on_pushButton_graf_clicked();
+    void on_openCreditCalcButton_clicked();
 };
 
 #endif // MAINWINDOW_H

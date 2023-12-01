@@ -19,6 +19,7 @@ set(PROJECT_SOURCES
         mainwindow.h
         mainwindow.ui
         parser.c
+        credit.c
         calc_sharting_yard.c
         calc_functions.h
         check_input_string.c
@@ -34,21 +35,19 @@ qt_add_executable(calculator
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         qcustomplot.cpp qcustomplot.h
+        credit.c
+        credit_calc.h credit_calc.cpp credit_calc.ui
 
 )
-    # target_include_directories(calculator PRIVATE .)
+
 target_include_directories(calculator PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(calculator PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(calculator PRIVATE Qt6::PrintSupport)
 
-# if(QT_VERSION_MAJOR EQUAL 6)
-#     qt_finalize_executable(calculator)
-# endif()
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET calculator APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-message(STATUS "Добавление файла parser.c: ${CMAKE_CURRENT_SOURCE_DIR}/parser.c")
 else()
     if(ANDROID)
         add_library(calculator SHARED

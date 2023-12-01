@@ -44,6 +44,22 @@ typedef enum {
   RIGHT_BRACKET = 20,
 } Type;
 
+typedef struct {
+    double sum_credit;
+    int term_credit;
+    int interest_rate;
+    bool annuity;
+    bool differentiated;
+} Credit_params;
+
+typedef struct {
+    double monthly_payment;
+    double overpayment;
+    double total_payout;
+    double min_payment;
+    double max_payment;
+} Credit_output;
+
 typedef enum {
   OK = 0,
   FAILED = 1,
@@ -85,6 +101,7 @@ void parse_arithmetic(Node** head, Node** tail, char* expression_str, int* i, do
 bool all_arithmetic_operation(Node* tail);
 bool all_trigonometry_operation(Node* tail);
 int check_valid_brackets(char* expression_str);
+Credit_output credit_calculator(Credit_params credit_params);
 #ifdef __cplusplus
 }
 #endif

@@ -1,6 +1,8 @@
 #include "calc_functions.h"
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include "./ui_credit_calc.h"
+#include "credit_calc.h"
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -45,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_25, &QPushButton::clicked, this, &MainWindow::clearButton_clicked);
     connect(ui->pushButton_12, &QPushButton::clicked, this, &MainWindow::calculateButton_clicked);
     connect(ui->pushButton_31, &QPushButton::clicked, this, &MainWindow::on_pushButton_graf_clicked);
+    connect(ui->pushButton_35, &QPushButton::clicked, this, &MainWindow::on_openCreditCalcButton_clicked);
 }
 
 MainWindow::~MainWindow()
@@ -67,14 +70,16 @@ void MainWindow::digitButton_clicked() {
 }
 
 void MainWindow::on_pushButton_graf_clicked() {
-    QString result_text = ui->lineEdit->text();
-    QByteArray array_of_bytes = result_text.toLocal8Bit();
-    char* str = array_of_bytes.data();
+    QString result_expression = ui->lineEdit->text();
+    QByteArray array_of_bytes = result_expression.toLocal8Bit();
+    char* str_parser = array_of_bytes.data();
     ui->widget_2->clearGraphs();
     x.clear();
     y.clear();
     yx_1 = 0;
     yx_2 = 0;
+    xy_1 = 0;
+    xy_2 = 0;
     xBegin = 0;
     xEnd = 0;
     h = 0.1;
@@ -96,7 +101,7 @@ void MainWindow::on_pushButton_graf_clicked() {
 
     for (X = xBegin; X <= xEnd; X += h) {
         x.push_back(X);
-        y.push_back(parser(str, Y*X));
+        y.push_back(parser(str_parser, Y*X));
     }
 
     ui->widget_2->addGraph();
@@ -139,6 +144,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
         // Для всех других клавиш вызываем базовую реализацию
         QMainWindow::keyPressEvent(event);
     }
+}
+
+void MainWindow::on_openCreditCalcButton_clicked() {
+    credit_calc credit_ui(this); // Создаем диалоговое окно как дочернее к MainWindow
+    credit_ui.exec(); // Показываем диалоговое окно
 }
 
 
