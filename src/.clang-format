@@ -1,0 +1,10 @@
+---
+BasedOnStyle: Google
+ColumnLimit: 120
+BinPackArguments: true
+BinPackParameters: true
+AlignAfterOpenBracket: DontAlign
+AllowAllArgumentsOnNextLine: false
+BreakBeforeBinaryOperators: None
+
+

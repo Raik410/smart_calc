@@ -1,0 +1,9 @@
+/Users/kysok/Downloads/C7_SmartCalc_v1.0-1-develop/src/Qt_calculator/build/CMakeFiles/calculator.dir
+/Users/kysok/Downloads/C7_SmartCalc_v1.0-1-develop/src/Qt_calculator/build/CMakeFiles/edit_cache.dir
+/Users/kysok/Downloads/C7_SmartCalc_v1.0-1-develop/src/Qt_calculator/build/CMakeFiles/rebuild_cache.dir
+/Users/kysok/Downloads/C7_SmartCalc_v1.0-1-develop/src/Qt_calculator/build/CMakeFiles/list_install_components.dir
+/Users/kysok/Downloads/C7_SmartCalc_v1.0-1-develop/src/Qt_calculator/build/CMakeFiles/install.dir
+/Users/kysok/Downloads/C7_SmartCalc_v1.0-1-develop/src/Qt_calculator/build/CMakeFiles/install/local.dir
+/Users/kysok/Downloads/C7_SmartCalc_v1.0-1-develop/src/Qt_calculator/build/CMakeFiles/install/strip.dir
+/Users/kysok/Downloads/C7_SmartCalc_v1.0-1-develop/src/Qt_calculator/build/CMakeFiles/calculator_autogen_timestamp_deps.dir
+/Users/kysok/Downloads/C7_SmartCalc_v1.0-1-develop/src/Qt_calculator/build/CMakeFiles/calculator_autogen.dir
