@@ -252,7 +252,3 @@ Provide a special mode "credit calculator" (you can take banki.ru and calcus.ru 
 Provide a special mode "deposit profitability calculator" (you can take banki.ru and calcus.ru as an example):
 - Input: deposit amount, deposit term, interest rate, tax rate, periodicity of payments, capitalization of interest, replenishments list, partial withdrawals list
 - Output: accrued interest, tax amount, deposit amount by the end of the term
-
-
-
-💡 [Tap here](https://forms.yandex.ru/cloud/6418155a6938722388a12878/) **to leave your feedback on the project**. Pedago Team really tries to make your educational experience better.
