@@ -18,6 +18,8 @@ make open
 // Enjoy :)
 ```
 
+![Calculator](./misc/calc.png)
+
 
 ## Contents
 
