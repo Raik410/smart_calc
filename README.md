@@ -1,11 +1,22 @@
 # SmartCalc v1.0
 
-> При старте работы над проектом просим вас постараться хронометрировать время работы над проектом.
-> По завершении работы над проектом просим вас ответить на два вопроса [в этом опросе](https://forms.gle/MAxcabZjBPmTmhPv5)
-
 Implementation of SmartCalc v1.0.
 
-The russian version of the task can be found in the repository.
+This is my smart calculator implemented for QT creator
+
+Calculator have some mathematical functions and graph(x)
+
+For install you need to install CMake, QT packages
+
+It support MacOS and any Linux
+
+Install steps:
+
+```
+make install // in src folder ( you already need installed packages )
+make open
+// Enjoy :)
+```
 
 
 ## Contents
